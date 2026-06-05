@@ -171,7 +171,7 @@ CMAP ?= rainbow
 # Choices expected by visual.py:
 #   svg, png, pdf
 #
-FIG_FORMAT ?= svg
+FIG_FORMAT ?= png
 
 # DPI for png/pdf.
 # For svg this does not matter much, but passing it is harmless.
@@ -197,7 +197,7 @@ DB_FLOOR ?= -60
 #   make visualize_bins COLOR_PERCENTILE=
 #   -> do not use percentile clipping.
 #
-COLOR_PERCENTILE ?= 99
+COLOR_PERCENTILE ?= 99.5
 
 # Exclude only the single largest value from color scale decision.
 #

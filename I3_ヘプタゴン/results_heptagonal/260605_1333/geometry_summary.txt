@@ -1,0 +1,13 @@
+Closed-cap concentrator geometry
+base_z [m]            =   2.2000000000E+00
+r_cone_in [m]         =   1.8000000000E-01
+r_pipe [m]            =   2.8000000000E-02
+l_cone [m]            =   1.6000000000E-01
+l_pipe [m]            =   5.0000000000E-02
+f_cap [m]             =   1.4000000000E-02
+cap_depth [m]         =   1.4000000000E-02
+z_cap_vertex [m]      =   2.4240000000E+00
+panel_total           = 390876
+panel_cone            = 354246
+panel_pipe            = 28620
+panel_parabolic_cap   = 8010
