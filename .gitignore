@@ -1,0 +1,38 @@
+# Build artifacts
+*.o
+*.mod
+*.exe
+*.out
+*.a
+*.so
+*.d
+
+# Python environment / cache
+**/.venv/
+**/__pycache__/
+*.py[cod]
+
+# Calculation results and runtime outputs
+**/bin/
+**/mod/
+**/out/
+**/results/
+**/ipo_checkpoint/
+**/ipo_checkpoint_closed_cap/
+**/result_with_PTD/
+**/*checkpoint*/
+**/250510/
+
+# Generated image and document outputs
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.pdf
+*.eps
+
+# Local editor/workspace files
+*.swp
+*~
+.DS_Store
