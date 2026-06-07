@@ -751,7 +751,7 @@ def parse_args() -> argparse.Namespace:
 
     parser.add_argument(
         "--format",
-        default="svg",
+        default="png",
         choices=["svg", "png", "pdf"],
         help="figure file format",
     )

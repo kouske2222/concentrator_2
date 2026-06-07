@@ -203,7 +203,7 @@ def plot_cross_sections(out_dir: Path, cfg: GeometryConfig, beta: float, ntheta:
     plt.title("Cross-sections of soft hexagon to circle transition")
     plt.grid(True, alpha=0.3)
     plt.legend(loc="best", fontsize=8)
-    savefig(out_dir / "01_cross_sections_xy.svg")
+    savefig(out_dir / "01_cross_sections_xy.png")
 
 
 def plot_xz_cuts(out_dir: Path, cfg: GeometryConfig, beta: float, nz: int) -> None:
@@ -222,7 +222,7 @@ def plot_xz_cuts(out_dir: Path, cfg: GeometryConfig, beta: float, nz: int) -> No
     plt.title("Longitudinal cuts: G2 transition into circular pipe")
     plt.grid(True, alpha=0.3)
     plt.legend(loc="best", fontsize=8)
-    savefig(out_dir / "02_xz_longitudinal_cuts.svg")
+    savefig(out_dir / "02_xz_longitudinal_cuts.png")
 
 
 def plot_radius_heatmap(out_dir: Path, cfg: GeometryConfig, beta: float, ntheta: int, nz: int) -> None:
@@ -239,7 +239,7 @@ def plot_radius_heatmap(out_dir: Path, cfg: GeometryConfig, beta: float, ntheta:
     plt.title("Radius map in cone section")
     cb = plt.colorbar(pc)
     cb.set_label("r(theta,z) [mm]")
-    savefig(out_dir / "03_radius_theta_z_heatmap.svg")
+    savefig(out_dir / "03_radius_theta_z_heatmap.png")
 
 
 def plot_g2_derivatives(out_dir: Path, cfg: GeometryConfig, beta: float, nz: int) -> Tuple[float, float]:
@@ -265,7 +265,7 @@ def plot_g2_derivatives(out_dir: Path, cfg: GeometryConfig, beta: float, nz: int
     plt.title("First derivative check: slope goes to zero at both ends")
     plt.grid(True, alpha=0.3)
     plt.legend(loc="best", fontsize=8)
-    savefig(out_dir / "04_g2_check_first_derivative.svg")
+    savefig(out_dir / "04_g2_check_first_derivative.png")
 
     plt.figure(figsize=(8.0, 5.0))
     for th, lab in zip(theta_list, labels):
@@ -280,7 +280,7 @@ def plot_g2_derivatives(out_dir: Path, cfg: GeometryConfig, beta: float, nz: int
     plt.title("Second derivative check: curvature goes to zero at both ends")
     plt.grid(True, alpha=0.3)
     plt.legend(loc="best", fontsize=8)
-    savefig(out_dir / "05_g2_check_second_derivative.svg")
+    savefig(out_dir / "05_g2_check_second_derivative.png")
 
     return max_abs_dz_at_ends, max_abs_dz2_at_ends
 
@@ -301,7 +301,7 @@ def plot_3d_surface(out_dir: Path, cfg: GeometryConfig, beta: float, ntheta: int
     ax.set_zlabel("z - base_z [mm]")
     ax.set_title("3D wireframe: soft hexagon cone connected to circular pipe")
     ax.set_box_aspect((2*cfg.r_cone_in, 2*cfg.r_cone_in, cfg.l_cone + cfg.l_pipe))
-    savefig(out_dir / "06_3d_wireframe_cone_pipe.svg")
+    savefig(out_dir / "06_3d_wireframe_cone_pipe.png")
 
 
 def plot_panel_like_sampling(out_dir: Path, cfg: GeometryConfig, beta: float) -> None:
@@ -334,7 +334,7 @@ def plot_panel_like_sampling(out_dir: Path, cfg: GeometryConfig, beta: float) ->
     ax.set_zlabel("z - base_z [mm]")
     ax.set_title("Panel-center-like sampling of cone section")
     ax.set_box_aspect((2*cfg.r_cone_in, 2*cfg.r_cone_in, cfg.l_cone))
-    savefig(out_dir / "07_panel_like_sampling_cone.svg")
+    savefig(out_dir / "07_panel_like_sampling_cone.png")
 
 
 def write_summary(out_dir: Path, cfg: GeometryConfig, beta: float, max_d1: float, max_d2: float) -> None:

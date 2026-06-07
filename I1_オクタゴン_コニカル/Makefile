@@ -171,7 +171,7 @@ CMAP ?= rainbow
 # Choices expected by visual.py:
 #   svg, png, pdf
 #
-FIG_FORMAT ?= svg
+FIG_FORMAT ?= png
 
 # DPI for png/pdf.
 # For svg this does not matter much, but passing it is harmless.
