@@ -240,7 +240,7 @@ def classify_z(z: float, cfg: Config) -> str:
     return "cap/downstream"
 
 
-def plot_shape_only(cfg: Config, out_dir: Path, file_format: str = "svg", dpi: int = 200) -> None:
+def plot_shape_only(cfg: Config, out_dir: Path, file_format: str = "png", dpi: int = 200) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     theta = np.linspace(0.0, 2.0*math.pi, 721)
     z_list = [
@@ -379,7 +379,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--local-scale", action="store_true", help="normalize each map by local maximum")
     parser.add_argument("--db-floor", type=float, default=-60.0)
     parser.add_argument("--cmap", default="rainbow")
-    parser.add_argument("--format", default="svg", choices=["svg", "png", "pdf"])
+    parser.add_argument("--format", default="png", choices=["svg", "png", "pdf"])
     parser.add_argument("--dpi", type=int, default=200)
     return parser.parse_args()
 
