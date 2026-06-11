@@ -1,0 +1,113 @@
+FC = gfortran
+PYTHON ?= python3
+ifneq ($(wildcard .venv/bin/python),)
+PYTHON := .venv/bin/python
+endif
+
+OUT_DIR = out
+MOD_DIR = mod
+BIN_DIR = bin
+
+# Checkpoint directories used by this code.
+# Do not use "make clean" when you only want to recompute field-map bins,
+# because clean removes checkpoint data.
+CHECKPOINT_DIRS = ipo_checkpoint ipo_checkpoint_closed_cap
+
+FFLAGS = -O3 -march=native -fopenmp -ffree-line-length-none -J$(MOD_DIR) -I$(MOD_DIR)
+
+SRC = mod_types.f90 \
+      mod_config.f90 \
+      mod_checkpoint.f90 \
+      mod_geometry.f90 \
+      mod_incident.f90 \
+      mod_field_integrals.f90 \
+      mod_currents_solver.f90 \
+      mod_io.f90 \
+      main_closed_cap.f90
+
+OBJS = $(SRC:%.f90=$(OUT_DIR)/%.o)
+
+TARGET = $(BIN_DIR)/closed_cap
+
+all: dirs $(TARGET)
+
+run: all
+	TZ=Asia/Tokyo ./$(TARGET)
+
+# Use this after reducing observation planes in mod_config.f90.
+# This keeps checkpoints and simply reruns the program.
+rerun_bins: all
+	TZ=Asia/Tokyo ./$(TARGET)
+
+rerun_bins_and_visualize: rerun_bins
+	$(PYTHON) visual.py --latest
+
+rerun_bins_and_visualize_exclude_wall: rerun_bins
+	$(PYTHON) visual.py --latest --exclude-wall --wall-radius 0.028 --wall-margin 0.90
+
+visualize_geometry:
+	$(PYTHON) visualize.py --config mod_config.f90
+
+dirs:
+	mkdir -p $(OUT_DIR) $(MOD_DIR) $(BIN_DIR)
+
+visualize_bins:
+	$(PYTHON) visual.py --latest
+
+visualize_bins_dir:
+	$(PYTHON) visual.py --dir $(RESULT_DIR)
+
+$(TARGET): $(OBJS) | dirs
+	$(FC) $(FFLAGS) -o $@ $^
+
+$(OUT_DIR)/%.o: %.f90 | dirs
+	$(FC) $(FFLAGS) -c $< -o $@
+
+# Remove only field-map binary outputs in the latest results directory.
+# This keeps IPO checkpoints.
+clean_latest_bins:
+	@d="$$(ls -td results/* 2>/dev/null | head -n 1)"; \
+	if [ -z "$$d" ]; then \
+	  echo "No results directory found."; \
+	  exit 1; \
+	fi; \
+	echo "Cleaning field-map bin files in $$d"; \
+	find "$$d" -type f \( \
+	  -name 'field_map*.bin' -o \
+	  -name '*xy*.bin' -o \
+	  -name '*xz*.bin' -o \
+	  -name '*XY*.bin' -o \
+	  -name '*XZ*.bin' \
+	\) -delete
+
+# Remove field-map bin files in a specified results directory.
+# Usage:
+#   make clean_bins_dir RESULT_DIR=results/xxxx
+clean_bins_dir:
+	@if [ -z "$(RESULT_DIR)" ]; then \
+	  echo "Usage: make clean_bins_dir RESULT_DIR=results/xxxx"; \
+	  exit 1; \
+	fi
+	@echo "Cleaning field-map bin files in $(RESULT_DIR)"
+	find "$(RESULT_DIR)" -type f \( \
+	  -name 'field_map*.bin' -o \
+	  -name '*xy*.bin' -o \
+	  -name '*xz*.bin' -o \
+	  -name '*XY*.bin' -o \
+	  -name '*XZ*.bin' \
+	\) -delete
+
+# clean removes build products and IPO checkpoint data.
+# It does NOT remove results/ field-output folders themselves.
+clean:
+	rm -rf $(OUT_DIR) $(MOD_DIR) $(BIN_DIR) $(CHECKPOINT_DIRS)
+	@if [ -d results ]; then \
+	  find results -type d \( -name 'ipo_checkpoint' -o -name 'ipo_checkpoint_*' -o -name 'ipo_checkpoint_closed_cap' \) -prune -exec rm -rf {} +; \
+	fi
+
+.PHONY: all run visualize_geometry dirs clean distclean \
+        visualize_bins visualize_bins_exclude_wall \
+        visualize_bins_dir visualize_bins_dir_exclude_wall \
+        clean_latest_bins clean_bins_dir \
+        rerun_bins rerun_bins_and_visualize \
+        rerun_bins_and_visualize_exclude_wall
