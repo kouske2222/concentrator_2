@@ -73,7 +73,7 @@ contains
 
     cfg%d_in      = 2.2_dp
     cfg%base_z    = cfg%d_in
-    cfg%r_cone_in = 0.180_dp
+    cfg%r_cone_in = 0.090_dp
     cfg%r_pipe    = 0.0280_dp
     cfg%l_cone    = 0.160_dp
     cfg%l_pipe    = 0.050_dp
