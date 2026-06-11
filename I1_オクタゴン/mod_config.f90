@@ -89,7 +89,7 @@ contains
     cfg%N_z_cone    = 600
     cfg%N_z_pipe    = 180
     cfg%N_r_cap     = 100
-    cfg%N_theta_max = 1024
+    cfg%N_theta_max = 1280
 
     cfg%max_reflection_order = 15
     cfg%stop_ratio            = 1.0e-2_dp
