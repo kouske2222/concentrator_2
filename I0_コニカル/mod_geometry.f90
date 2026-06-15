@@ -43,7 +43,7 @@ contains
     end if
   end function wall_radius_at_z
 
-    pure real(dp) function octagon_softmax_beta_default() result(beta)
+  pure real(dp) function octagon_softmax_beta_default() result(beta)
 
     beta = 1.0_dp
 
@@ -60,7 +60,7 @@ contains
 
   end function smootherstep_local
 
-    pure real(dp) function octagonal_taper_radius(t, r_cone_in, r_pipe) result(rref)
+  pure real(dp) function octagonal_taper_radius(t, r_cone_in, r_pipe) result(rref)
     real(dp), intent(in) :: t
     real(dp), intent(in) :: r_cone_in
     real(dp), intent(in) :: r_pipe
@@ -83,7 +83,7 @@ contains
   ! to a circle.  At both ends, ds/dt = d2s/dt2 = 0.
   pure real(dp) function oct_hold_fraction_default() result(t0)
 
-    t0 = 0.9_dp
+    t0 = 0.8_dp
 
   end function oct_hold_fraction_default
 
