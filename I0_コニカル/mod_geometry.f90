@@ -90,7 +90,7 @@ contains
 
   pure real(dp) function oct_transition_end_fraction_default() result(t1)
 
-    t1 = 0.9_dp
+    t1 = 0.95_dp
 
   end function oct_transition_end_fraction_default
 
