@@ -42,8 +42,8 @@ FC = gfortran
 # Python executable.
 # If .venv/bin/python exists, use it automatically.
 PYTHON ?= python3
-ifneq ($(wildcard .venv/bin/python),)
-PYTHON := .venv/bin/python
+ifneq ($(wildcard ../.venv/bin/python),)
+PYTHON := ../.venv/bin/python
 endif
 
 # Output directories for compilation
