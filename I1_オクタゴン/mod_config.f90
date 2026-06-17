@@ -67,11 +67,11 @@ contains
     cfg%lam0 = cfg%c0 / cfg%freq
     cfg%k0   = 2.0_dp * PI / cfg%lam0
 
-    cfg%w0_src = 0.0204_dp
+    cfg%w0_src = 0.20_dp
     cfg%z0_src = 0.0_dp
     cfg%zR_src = PI * cfg%w0_src**2 / cfg%lam0
 
-    cfg%d_in      = 2.2_dp
+    cfg%d_in      = 0.2_dp
     cfg%base_z    = cfg%d_in
     cfg%r_cone_in = 0.090_dp
     cfg%r_pipe    = 0.0280_dp
