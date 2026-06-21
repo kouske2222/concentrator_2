@@ -759,7 +759,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--dpi",
         type=int,
-        default=200,
+        default=400,
         help="DPI for png/pdf output",
     )
 

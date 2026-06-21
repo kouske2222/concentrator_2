@@ -175,7 +175,7 @@ FIG_FORMAT ?= png
 
 # DPI for png/pdf.
 # For svg this does not matter much, but passing it is harmless.
-DPI ?= 200
+DPI ?= 400
 
 # dB floor for dB plots.
 #

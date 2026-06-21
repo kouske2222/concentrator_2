@@ -106,7 +106,7 @@ contains
     cfg%NX_XY = 401
     cfg%NY_XY = 401
 
-    cfg%N_XY_PLANES_CONE = 8
+    cfg%N_XY_PLANES_CONE = 20
     cfg%N_XY_PLANES_PIPE = 3
     cfg%N_XY_PLANES      = cfg%N_XY_PLANES_CONE + cfg%N_XY_PLANES_PIPE
     cfg%BLOCK_SIZE_XY = 10000

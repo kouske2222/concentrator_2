@@ -21,7 +21,7 @@ contains
     real(dp), intent(in) :: z, base_z, l_cone, l_pipe
     real(dp), intent(in) :: r_cone_in, r_pipe, f_cap
     real(dp) :: zloc, z_pipe_end, z_cap_vertex, arg
-    real(dp) :: t
+    real(dp) :: t, s
 
     zloc = z - base_z
     z_pipe_end = base_z + l_cone + l_pipe
@@ -31,10 +31,10 @@ contains
       rw = -1.0_dp
     else if (zloc <= l_cone) then
       t = zloc / l_cone
+      s = delayed_oct_to_circle_weight(t)
 
-      ! Reference outer radius for grid / plotting.
-      ! Keep it linear over the entire cone section.
-      rw = octagonal_taper_radius(t, r_cone_in, r_pipe)
+      ! Plot / grid-size radius for tapered octagon-to-circle geometry.
+      rw = (1.0_dp - s) * octagonal_taper_radius(t, r_cone_in, r_pipe) + s * r_pipe
     else if (z <= z_pipe_end) then
       rw = r_pipe
     else
@@ -43,7 +43,7 @@ contains
     end if
   end function wall_radius_at_z
 
-  pure real(dp) function octagon_softmax_beta_default() result(beta)
+    pure real(dp) function octagon_softmax_beta_default() result(beta)
 
     beta = 80.0_dp
 
@@ -60,7 +60,7 @@ contains
 
   end function smootherstep_local
 
-  pure real(dp) function octagonal_taper_radius(t, r_cone_in, r_pipe) result(rref)
+    pure real(dp) function octagonal_taper_radius(t, r_cone_in, r_pipe) result(rref)
     real(dp), intent(in) :: t
     real(dp), intent(in) :: r_cone_in
     real(dp), intent(in) :: r_pipe
@@ -69,8 +69,9 @@ contains
 
     tt = min(max(t, 0.0_dp), 1.0_dp)
 
-    ! Linear taper over the whole cone.
-    ! dR/dz is constant in the cone section.
+    ! Linear taper in z.
+    ! t = 0 : entrance octagonal radius
+    ! t = 1 : pipe radius
     rref = r_cone_in + (r_pipe - r_cone_in) * tt
 
   end function octagonal_taper_radius
@@ -82,14 +83,14 @@ contains
   ! to a circle.  At both ends, ds/dt = d2s/dt2 = 0.
   pure real(dp) function oct_hold_fraction_default() result(t0)
 
-    t0 = 0.8_dp
+    t0 = 0.9_dp
 
   end function oct_hold_fraction_default
 
 
   pure real(dp) function oct_transition_end_fraction_default() result(t1)
 
-    t1 = 1.0_dp
+    t1 = 1.00_dp
 
   end function oct_transition_end_fraction_default
 
@@ -183,25 +184,23 @@ contains
       real(dp), intent(in) :: r_pipe
 
       real(dp) :: s
+      real(dp) :: r8
       real(dp) :: rref
-      real(dp) :: g8
 
       ! Octagon-to-circle transition weight.
       ! s = 0 : octagonal cross-section
       ! s = 1 : circular cross-section
       s = delayed_oct_to_circle_weight(t)
 
-      ! Linear reference radius.
-      ! This controls dR/dz.
+      ! z-dependent reference radius.
+      ! This makes the octagonal part a tapered frustum, not a prism.
       rref = octagonal_taper_radius(t, r_cone_in, r_pipe)
 
-      ! Dimensionless soft-octagon shape factor.
-      ! g8 = 1 at the reference vertex direction.
-      g8 = soft_octagon_radius(theta, 1.0_dp)
+      ! Soft octagon whose size decreases along z.
+      r8 = soft_octagon_radius(theta, rref)
 
-      ! Blend only the cross-section shape, not the absolute radius.
-      ! Therefore the reference radial taper remains linear.
-      rw = rref * ((1.0_dp - s) * g8 + s)
+      ! Blend from tapered octagon to circular pipe.
+      rw = (1.0_dp - s) * r8 + s * r_pipe
 
   end function blended_cone_radius
 
@@ -302,10 +301,8 @@ contains
       zc = (real(i, dp) - 0.5_dp) * dz_c
       t_c = zc / l_cone
       s_c = delayed_oct_to_circle_weight(t_c)
-      ! Maximum reference radius at this z.
-      ! Keep panel density based on the linear taper radius.
-      r_count = octagonal_taper_radius(t_c, r_cone_in, r_pipe)
-     
+      ! Maximum radius at this z.  The actual radius still depends on theta.
+      r_count = (1.0_dp - s_c) * octagonal_taper_radius(t_c, r_cone_in, r_pipe)  + s_c * r_pipe
       ntheta_cone(i) = max(nint(2.0_dp * PI * r_count / ds_target), 12)
       n_total = n_total + ntheta_cone(i)
     end do

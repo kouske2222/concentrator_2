@@ -237,14 +237,12 @@ contains
     integer :: Nx_l, Nz_l, ntot_l, ix_l, iz_l, idx_l, ibeg_l, iend_l
     real(dp) :: x_min_l, x_max_l, z_min_l, z_max_l, dx_l, dz_l
     real(dp) :: r_wall_l, x_half_l
-    real(dp) :: wall_clearance_l 
 
     print *, 'Step 3a: Calculating XZ field map'
 
     Nx_l = cfg_in%NX_XZ
     Nz_l = cfg_in%NZ_XZ
     ntot_l = Nx_l * Nz_l
-    wall_clearance_l = max(0.2_dp * cfg_in%lam0, 2.0_dp * maxval(panel_len_in))
 
     allocate(xg(ntot_l), yg(ntot_l), zg(ntot_l), esq(ntot_l))
     allocate(mask(ntot_l))
@@ -271,8 +269,9 @@ contains
         r_wall_l = wall_radius_at_z( &
             zg(idx_l), cfg_in%base_z, cfg_in%l_cone, cfg_in%l_pipe, &
             cfg_in%r_cone_in, cfg_in%r_pipe, cfg_in%f_cap)
-        mask(idx_l) = (r_wall_l > wall_clearance_l) .and. &
-              (abs(xg(idx_l)) <= r_wall_l - wall_clearance_l)
+
+        mask(idx_l) = (r_wall_l >= 0.0_dp) .and. &
+                      (abs(xg(idx_l)) <= (1.0_dp + cfg_in%field_outer_margin_factor_xz) * r_wall_l)
       end do
     end do
 
@@ -327,8 +326,7 @@ contains
     complex(dp), intent(in) :: Jx_in(:), Jy_in(:), Jz_in(:)
     real(dp), intent(in) :: z_list(:)
     real(dp) :: z_l, r_wall_l, r_plot_l
-    real(dp) :: wall_clearance_l
-    real(dp) :: r_cell_l, theta_l
+real(dp) :: r_cell_l, theta_l
 
     real(dp), allocatable :: xg(:), yg(:), zg(:), esq(:)
     complex(dp), allocatable :: Ex_tot(:), Ey_tot(:), Ez_tot(:)
@@ -345,7 +343,6 @@ contains
     Nx_l = cfg_in%NX_XY
     Ny_l = cfg_in%NY_XY
     ntot_l = Nx_l * Ny_l
-    wall_clearance_l = max(0.2_dp * cfg_in%lam0, 2.0_dp * maxval(panel_len_in))
 
     allocate(xg(ntot_l), yg(ntot_l), zg(ntot_l), esq(ntot_l))
     allocate(mask(ntot_l))
@@ -389,8 +386,8 @@ contains
                 cfg_in%base_z, cfg_in%l_cone, cfg_in%l_pipe, &
                 cfg_in%r_cone_in, cfg_in%r_pipe, cfg_in%f_cap)
 
-            mask(idx_l) = (r_wall_l > wall_clearance_l) .and. &
-                (r_cell_l <= r_wall_l - wall_clearance_l)
+            mask(idx_l) = (r_wall_l >= 0.0_dp) .and. &
+                          (r_cell_l <= (1.0_dp + cfg_in%field_outer_margin_factor_xy) * r_wall_l)
           end do
         end do
 
