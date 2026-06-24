@@ -1,0 +1,19 @@
+# Local Jupyter runtime files
+.jupyter/
+.ipynb_checkpoints/
+
+# Raw result dumps
+[0-9][0-9][0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9]/
+*.bin
+*.csv
+*.npy
+*.npz
+*.dat
+*.h5
+*.hdf5
+*:Zone.Identifier
+
+# Generated comparison outputs
+comparison_profiles/
+raytrace_comparison/
+raytrace_shape_comparison/
