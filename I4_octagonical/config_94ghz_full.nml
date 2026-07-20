@@ -1,0 +1,17 @@
+&simulation
+  freq=94.0e9,
+  e0=1.0, w0_src=0.049, z0_src=-2.2,
+  beam_offset_x=0.0, beam_offset_y=0.0,
+  incidence_theta_deg=0.0, incidence_phi_deg=0.0, polarization_deg=0.0,
+  use_plane_wave=.false.,
+  M=8, d_in=0.180, d_out=0.065, l_cone=0.160, l_pipe=0.200,
+  base_z=0.0, diameter_across_vertices=.true.,
+  n_face=80, n_z_cone=113, n_z_pipe=141,
+  max_reflection_order=2, run_mode=1, stop_ratio=1.0e-4, visibility_samples=10,
+  wall_clearance_fraction=0.01,
+  nx_xz=81, nz_xz=141, nxy=81, naxis=281,
+  use_dense_full=.false., run_full=.true., compute_fields=.true.,
+  save_order_exit_fields=.false., max_dense_gib=2.0, estimated_pair_rate=2.0e7,
+  mode_policy=2, mode_tolerance=1.0e-8,
+  output_dir='results/target_94ghz'
+/
