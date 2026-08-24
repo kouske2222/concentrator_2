@@ -1,0 +1,17 @@
+&simulation
+  freq=3.0e9,
+  e0=1.0, w0_src=0.080, z0_src=-0.25,
+  beam_offset_x=0.0, beam_offset_y=0.0,
+  incidence_theta_deg=0.0, incidence_phi_deg=0.0, polarization_deg=0.0,
+  use_plane_wave=.false.,
+  M=6, d_in=0.180, d_out=0.065, l_cone=0.160, l_pipe=0.100,
+  base_z=0.0, diameter_across_vertices=.true.,
+  n_face=3, n_z_cone=6, n_z_pipe=4,
+  max_reflection_order=4, run_mode=2, stop_ratio=1.0e-4, visibility_samples=7,
+  wall_clearance_fraction=0.04,
+  nx_xz=51, nz_xz=81, nxy=41, naxis=161,
+  use_dense_full=.false., run_full=.true., compute_fields=.true.,
+  save_order_exit_fields=.true., write_mode_fields=.true., max_dense_gib=2.0, estimated_pair_rate=2.0e7,
+  mode_policy=0, mode_tolerance=1.0e-8,
+  output_dir='results/validation_split'
+/
