@@ -6,5 +6,5 @@ d37311da872406c1a439f1c184f12d80fb8269d7
 
 The original directory is not modified.  This comparison preserves the
 module naming style and the Gaussian/PO/IPO/field-integral organization,
-while changing the geometry to an open, exactly C8-replicated octagonal
+while changing the geometry to an open, exactly C6-replicated hexagonal
 taper and changing the phasor convention to exp(-j omega t).

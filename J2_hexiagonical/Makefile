@@ -11,7 +11,9 @@ SOLVERS := full3d/mod_full3d.f90 c6_modal/mod_c6_modal.f90
 COMPARE := $(BUILD)/compare_full_vs_c6
 SWEEP := $(BUILD)/run_94ghz_sweep
 
-.PHONY: all run run-94 preflight-94 plot check-python install-python-deps clean debug
+.NOTPARALLEL:
+
+.PHONY: all run run-modal run-94 preflight-94 plot plot-modes plot-all check-python install-python-deps clean debug
 all: $(COMPARE) $(SWEEP)
 
 $(COMPARE): $(COMMON) $(SOLVERS) compare_full_vs_c6.f90
@@ -26,6 +28,9 @@ run: $(COMPARE)
 	$(OMP_ENV) ./$(COMPARE) config_validation_full.nml
 	$(OMP_ENV) ./$(COMPARE) config_validation_modal.nml
 	$(OMP_ENV) ./$(COMPARE) config_validation_post.nml
+
+run-modal: $(COMPARE)
+	$(OMP_ENV) ./$(COMPARE) config_validation_modal.nml
 
 run-94: $(COMPARE)
 	$(OMP_ENV) ./$(COMPARE) config_94ghz_full.nml
@@ -42,7 +47,12 @@ install-python-deps: check-python
 	$(PYTHON) -m pip install -r requirements.txt
 
 plot: check-python
-	MPLCONFIGDIR=$${MPLCONFIGDIR:-/tmp/matplotlib} $(PYTHON) plot_compare.py --result results/validation
+	MPLCONFIGDIR=$${MPLCONFIGDIR:-/tmp/matplotlib} $(PYTHON) plot_compare.py --result results/validation_split
+
+plot-modes: check-python
+	MPLCONFIGDIR=/tmp/matplotlib $(PYTHON) plot_modes.py --result results/validation_split
+
+plot-all: plot plot-modes
 
 debug: FFLAGS := -O0 -g -fopenmp -ffree-line-length-none -Wall -Wextra -Wimplicit-interface \
                   -fcheck=all -ffpe-trap=invalid,zero,overflow -fbacktrace
