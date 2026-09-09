@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "target_Q": 512,
+  "actual_Q": 528,
+  "mesh": {
+    "target_Q": 512,
+    "actual_Q_requested": 528,
+    "scale": 0.04383972994809528,
+    "n_face": 8,
+    "n_z_cone": 15,
+    "n_z_pipe": 18
+  },
+  "settings": {
+    "tol": 1e-06,
+    "leaf": 16,
+    "max_rank": 32,
+    "eta": 2.0,
+    "phase_limit": 8.0,
+    "memory_mib": 4096
+  },
+  "kernel_init_seconds": 0.004981570999916585,
+  "T_build_total_seconds": 1.607165951999832,
+  "hmatrix_stats": {
+    "low_rank_blocks": 40,
+    "direct_blocks": 12504,
+    "zero_blocks": 2,
+    "certified_norm2": 6.750906505386889,
+    "certified_error2": 9.118842819660313e-32,
+    "stored_bytes": 14279680,
+    "cache_loaded": false,
+    "build_seconds": 0.9981747809997614,
+    "scalar_kernel_evaluations": 653391,
+    "near_plan_bytes": 1170960,
+    "build_kernel_evaluations_this_run": 653391
+  },
+  "operator": {
+    "direct_seconds": {
+      "median": 0.3370295210002041,
+      "min": 0.32771853400026885,
+      "max": 0.345207314000163,
+      "all": [
+        0.345207314000163,
+        0.3370295210002041,
+        0.32771853400026885
+      ]
+    },
+    "hmatrix_seconds": {
+      "median": 0.3350030890001108,
+      "min": 0.33488923499999146,
+      "max": 0.3488842179999665,
+      "all": [
+        0.3488842179999665,
+        0.3350030890001108,
+        0.33488923499999146
+      ]
+    },
+    "speedup_direct_over_hmatrix": 1.0060489949693947,
+    "relative_operator_error_l2": 2.3226677301998208e-15
+  },
+  "break_even": {
+    "exists": true,
+    "N_break": 793.1013485405908,
+    "first_profitable_application": 794,
+    "reason": null
+  },
+  "rank_summary": {
+    "categories": {
+      "1-4": {
+        "block_count": 8,
+        "dense_equivalent_entries": 9720,
+        "apply_work_proxy": 2304,
+        "block_percent": 0.06377551020408163,
+        "dense_entry_percent": 0.07048872180451128,
+        "apply_work_percent": 0.016742969260954872
+      },
+      "5-8": {
+        "block_count": 20,
+        "dense_equivalent_entries": 24300,
+        "apply_work_proxy": 9216,
+        "block_percent": 0.15943877551020408,
+        "dense_entry_percent": 0.1762218045112782,
+        "apply_work_percent": 0.06697187704381949
+      },
+      "9-16": {
+        "block_count": 12,
+        "dense_equivalent_entries": 14580,
+        "apply_work_proxy": 8640,
+        "block_percent": 0.09566326530612244,
+        "dense_entry_percent": 0.10573308270676691,
+        "apply_work_percent": 0.06278613472858077
+      },
+      "17-32+": {
+        "block_count": 0,
+        "dense_equivalent_entries": 0,
+        "apply_work_proxy": 0,
+        "block_percent": 0.0,
+        "dense_entry_percent": 0.0,
+        "apply_work_percent": 0.0
+      },
+      "direct": {
+        "block_count": 12504,
+        "dense_equivalent_entries": 13740840,
+        "apply_work_proxy": 13740840,
+        "block_percent": 99.6811224489796,
+        "dense_entry_percent": 99.64755639097744,
+        "apply_work_percent": 99.85349901896664
+      }
+    },
+    "totals": {
+      "block_count": 12544,
+      "dense_equivalent_entries": 13789440,
+      "apply_work_proxy": 13761000
+    }
+  },
+  "files": {
+    "scaled_config": "/home/irie/fortran/my_project/concentrator_2/K1_SUS_C6_hmatrix copy/benchmark_scaling_results/Q_target_000512/config_scaled.nml",
+    "block_stats_csv": "/home/irie/fortran/my_project/concentrator_2/K1_SUS_C6_hmatrix copy/benchmark_scaling_results/Q_target_000512/block_stats.csv",
+    "rank_by_geometry_csv": "/home/irie/fortran/my_project/concentrator_2/K1_SUS_C6_hmatrix copy/benchmark_scaling_results/Q_target_000512/rank_by_geometry.csv"
+  }
+}
