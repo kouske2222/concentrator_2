@@ -1,0 +1,41 @@
+...170 GHz / C6: Q=16 panels/sector, N=96 total
+Candidate pairs/order: 1,536 (matrix-free, O(Q^2) time)
+Pair-map calls after coplanar exclusion: 1,408
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = -1
+{"j_ratio": 1.0, "j_initial": 1.0, "e_ratio": 0.5, "order": 0, "wall_seconds": 0.0008266549848485738}
+{"j_ratio": 0.3391817326856071, "j_initial": 0.5099019513592785, "e_ratio": 0.2037978074609209, "order": 1, "wall_seconds": 0.00020087897428311408}
+{"j_ratio": 0.1484478744118443, "j_initial": 0.25999999999999995, "e_ratio": 0.09463873139523603, "order": 2, "wall_seconds": 0.00018191197887063026}
+{"j_ratio": 0.07088860692601918, "j_initial": 0.1325745073534124, "e_ratio": 0.04630387063498584, "order": 3, "wall_seconds": 0.001183095999294892}
+MAX_ORDER: NOT CONVERGED; last committed order=3
+170 GHz / C6: Q=16 panels/sector, N=96 total
+Candidate pairs/order: 1,536 (matrix-free, O(Q^2) time)
+Pair-map calls after coplanar exclusion: 1,408
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = -1
+{"j_ratio": 1.0, "j_initial": 1.0, "e_ratio": 0.5, "order": 0, "wall_seconds": 0.00018844997975975275}
+{"j_ratio": 0.3391817326856071, "j_initial": 0.5099019513592785, "e_ratio": 0.2037978074609209, "order": 1, "wall_seconds": 0.0001688710181042552}
+Requested step limit: paused; rerun the same command to resume.
+170 GHz / C6: Q=16 panels/sector, N=96 total
+Candidate pairs/order: 1,536 (matrix-free, O(Q^2) time)
+Pair-map calls after coplanar exclusion: 1,408
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = 1
+{"j_ratio": 0.1484478744118443, "j_initial": 0.25999999999999995, "e_ratio": 0.09463873139523603, "order": 2, "wall_seconds": 0.0001139399828389287}
+{"j_ratio": 0.07088860692601918, "j_initial": 0.1325745073534124, "e_ratio": 0.04630387063498584, "order": 3, "wall_seconds": 0.00015699199866503477}
+MAX_ORDER: NOT CONVERGED; last committed order=3
+.WARNING: order_000001: checksum mismatch; preserved as order_000001.corrupt-1788927930700962590
+...
+----------------------------------------------------------------------
+Ran 7 tests in 0.287s
+
+OK

@@ -1,0 +1,170 @@
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ variant,pairs,blocked,old_visibility_misses,changed_maps=           1       63504       19056         324         180
+ max_map_difference,relative_C6_difference=   0.0000000000000000        0.0000000000000000     
+ exact_unculled_seconds,optimized_seconds=   2.5508640101179481E-003   2.2492299904115498E-003
+ variant,pairs,blocked,old_visibility_misses,changed_maps=           2       63504           0           0           0
+ max_map_difference,relative_C6_difference=   0.0000000000000000        0.0000000000000000     
+ exact_unculled_seconds,optimized_seconds=   3.1499959877692163E-003   3.1577410118188709E-003
+ variant,pairs,blocked,old_visibility_misses,changed_maps=           3       63504           0           0           0
+ max_map_difference,relative_C6_difference=   0.0000000000000000        0.0000000000000000     
+ exact_unculled_seconds,optimized_seconds=   3.5108169831801206E-003   3.3349090081173927E-003
+ Geometry / culling / C6 equivalence tests PASS
+mkdir -p build/mod
+gfortran -O3 -fopenmp -ffree-line-length-none -Wall -Wextra -Jbuild/mod -Ibuild/mod common/mod_types.f90 common/mod_config.f90 common/mod_material.f90 common/mod_geometry.f90 common/mod_incident.f90 common/mod_operator.f90 c6_modal/mod_c6_modal.f90 worker.f90 -o build/worker
+common/mod_material.f90:56:50:
+
+   56 |   pure subroutine electric_kernel(k,eta0,rvec,area,J,E,H,propagator)
+      |                                                  1
+Warning: Unused dummy argument ‘area’ at (1) [-Wunused-dummy-argument]
+c6_modal/mod_c6_modal.f90:32:32:
+
+   32 |   subroutine select_active_modes(mode_norms, mode_policy, mode_tolerance, active_modes)
+      |                                ^
+Warning: ‘select_active_modes’ defined but not used [-Wunused-function]
+c6_modal/mod_c6_modal.f90:73:32:
+
+   73 |   subroutine gather_active_modes(Jhat, active_modes, Jmode)
+      |                                ^
+Warning: ‘gather_active_modes’ defined but not used [-Wunused-function]
+worker.f90:15:55:
+
+   15 |   complex(dp) :: E(3,np),H(3,np),Ei(3,np),Hi(3),temp(3)
+      |                                                       1
+Warning: Unused variable ‘temp’ declared at (1) [-Wunused-variable]
+../.venv/bin/python -m unittest discover -s tests -v
+test_area_weight_and_complex_cancellation (test_restart.RestartTests.test_area_weight_and_complex_cancellation) ... ok
+test_changed_conditions_rejected (test_restart.RestartTests.test_changed_conditions_rejected) ... ok
+test_consecutive_and_minimum (test_restart.RestartTests.test_consecutive_and_minimum) ... ok
+test_controller_resume_with_stub_worker (test_restart.RestartTests.test_controller_resume_with_stub_worker) ... 170 GHz / C6: Q=16 panels/sector, N=96 total
+Pair evaluations/order: 1,536 (matrix-free, O(Q^2) time)
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = -1
+{"j_ratio": 1.0, "j_initial": 1.0, "e_ratio": 0.5, "order": 0, "wall_seconds": 0.0008616819977760315}
+{"j_ratio": 0.3391817326856071, "j_initial": 0.5099019513592785, "e_ratio": 0.2037978074609209, "order": 1, "wall_seconds": 0.00015253000310622156}
+{"j_ratio": 0.1484478744118443, "j_initial": 0.25999999999999995, "e_ratio": 0.09463873139523603, "order": 2, "wall_seconds": 0.00015446901670657098}
+{"j_ratio": 0.07088860692601918, "j_initial": 0.1325745073534124, "e_ratio": 0.04630387063498584, "order": 3, "wall_seconds": 0.00016048600082285702}
+MAX_ORDER: NOT CONVERGED; last committed order=3
+170 GHz / C6: Q=16 panels/sector, N=96 total
+Pair evaluations/order: 1,536 (matrix-free, O(Q^2) time)
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = -1
+{"j_ratio": 1.0, "j_initial": 1.0, "e_ratio": 0.5, "order": 0, "wall_seconds": 0.00016197800869122148}
+{"j_ratio": 0.3391817326856071, "j_initial": 0.5099019513592785, "e_ratio": 0.2037978074609209, "order": 1, "wall_seconds": 0.0001721150183584541}
+Requested step limit: paused; rerun the same command to resume.
+170 GHz / C6: Q=16 panels/sector, N=96 total
+Pair evaluations/order: 1,536 (matrix-free, O(Q^2) time)
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = 1
+{"j_ratio": 0.1484478744118443, "j_initial": 0.25999999999999995, "e_ratio": 0.09463873139523603, "order": 2, "wall_seconds": 0.00012040699948556721}
+{"j_ratio": 0.07088860692601918, "j_initial": 0.1325745073534124, "e_ratio": 0.04630387063498584, "order": 3, "wall_seconds": 0.00016776900156401098}
+MAX_ORDER: NOT CONVERGED; last committed order=3
+ok
+test_corrupt_latest_falls_back_and_preserves (test_restart.RestartTests.test_corrupt_latest_falls_back_and_preserves) ... WARNING: order_000001: checksum mismatch; preserved as order_000001.corrupt-1788927779204917123
+ok
+test_interrupted_save_keeps_previous (test_restart.RestartTests.test_interrupted_save_keeps_previous) ... ok
+test_roundtrip_and_pending_ignored (test_restart.RestartTests.test_roundtrip_and_pending_ignored) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.269s
+
+OK
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ TE/TM plane-wave currents and passive reflection: PASS
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+170 GHz / C6: Q=16 panels/sector, N=96 total
+Pair evaluations/order: 1,536 (matrix-free, O(Q^2) time)
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = -1
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+{"j_ratio": 1.0, "j_initial": 1.0, "e_ratio": 0.9990394035300101, "order": 0, "wall_seconds": 0.003672223014291376}
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+{"j_ratio": 0.9948082497286871, "j_initial": 34.2383545451365, "e_ratio": 0.9954978261512784, "order": 1, "wall_seconds": 0.0031376959814224392}
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+{"j_ratio": 0.9980156742303269, "j_initial": 974.9287348028686, "e_ratio": 0.9977101424603586, "order": 2, "wall_seconds": 0.00302501700934954}
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+{"j_ratio": 1.005675371997833, "j_initial": 34810.96061389032, "e_ratio": 1.005196801046838, "order": 3, "wall_seconds": 0.003323939017718658}
+MAX_ORDER: NOT CONVERGED; last committed order=3
+170 GHz / C6: Q=16 panels/sector, N=96 total
+Pair evaluations/order: 1,536 (matrix-free, O(Q^2) time)
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = -1
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+{"j_ratio": 1.0, "j_initial": 1.0, "e_ratio": 0.9990394035300101, "order": 0, "wall_seconds": 0.0035778589954134077}
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+{"j_ratio": 0.9948082497286871, "j_initial": 34.2383545451365, "e_ratio": 0.9954978261512784, "order": 1, "wall_seconds": 0.00335470397840254}
+Requested step limit: paused; rerun the same command to resume.
+170 GHz / C6: Q=16 panels/sector, N=96 total
+Pair evaluations/order: 1,536 (matrix-free, O(Q^2) time)
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = 1
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+{"j_ratio": 0.9980156742303269, "j_initial": 974.9287348028686, "e_ratio": 0.9977101424603586, "order": 2, "wall_seconds": 0.0034299569961149246}
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+{"j_ratio": 1.005675371997833, "j_initial": 34810.96061389032, "e_ratio": 1.005196801046838, "order": 3, "wall_seconds": 0.003224855026928708}
+MAX_ORDER: NOT CONVERGED; last committed order=3
+C6 uninterrupted/restart PASS
+[
+  {
+    "mesh": [
+      2,
+      2,
+      2
+    ],
+    "Q": 16,
+    "median_worker_seconds": {
+      "worker_old": 0.0037496330041904002,
+      "worker": 0.0029847239784430712
+    },
+    "old_vs_exact_relative_error": {
+      "j": 0.01808276188946386,
+      "e": 0.02229147820658024
+    }
+  },
+  {
+    "mesh": [
+      8,
+      12,
+      12
+    ],
+    "Q": 384,
+    "median_worker_seconds": {
+      "worker_old": 0.3519835070183035,
+      "worker": 0.20903605700004846
+    },
+    "old_vs_exact_relative_error": {
+      "j": 0.011450665798831066,
+      "e": 0.011954084872254142
+    }
+  }
+]
