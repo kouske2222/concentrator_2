@@ -1,4 +1,0 @@
-target_Q,actual_Q,n_face,n_z_cone,n_z_pipe,kernel_init_seconds,T_build_total_seconds,T_direct_operator_seconds,T_hmatrix_operator_seconds,operator_speedup,relative_operator_error_l2,N_break,first_profitable_application,low_rank_blocks,direct_blocks,zero_blocks,stored_bytes,scalar_kernel_evaluations,status,error
-1024,1012,11,21,25,0.004671675000281539,60.78873849499996,1.1943389609996302,1.2206628010003442,0.9784347978990255,6.183836504413989e-10,inf,,1056,48596,2,68411972,44722860,ok,
-2048,2080,16,30,35,0.0006940630000826786,468.5709240590004,5.288587249000102,5.0730965959996865,1.0424771436779534,2.5455864071307313e-08,2174.437348139165,2175,4031,184894,2,359631992,393802752,ok,
-4096,,22,42,50,,,,,,,,,,,,,,failed,MemoryError: H-matrix block limit exceeded; previous order retained
