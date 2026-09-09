@@ -1,5 +1,0 @@
-build/
-results/
-__pycache__/
-*.pyc
-benchmark_scaling_results/
