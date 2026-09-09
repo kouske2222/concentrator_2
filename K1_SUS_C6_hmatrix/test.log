@@ -1,0 +1,58 @@
+OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 ../.venv/bin/python -m unittest discover -s tests -v
+test_complex_low_rank_and_exhaustive_certificate (test_hmatrix.ACATests.test_complex_low_rank_and_exhaustive_certificate) ... ok
+test_zero_samples_do_not_authorize_zero_block (test_hmatrix.ACATests.test_zero_samples_do_not_authorize_zero_block) ... ok
+test_actual_compression_and_fallback (test_hmatrix.HMTests.test_actual_compression_and_fallback) ...  Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ok
+test_restart_and_setting_change_rejected (test_hmatrix.HMTests.test_restart_and_setting_change_rejected) ... ok
+test_six_modes_direct_cache_and_corruption (test_hmatrix.HMTests.test_six_modes_direct_cache_and_corruption) ...  Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ok
+test_area_weight_and_complex_cancellation (test_restart.RestartTests.test_area_weight_and_complex_cancellation) ... ok
+test_changed_conditions_rejected (test_restart.RestartTests.test_changed_conditions_rejected) ... ok
+test_consecutive_and_minimum (test_restart.RestartTests.test_consecutive_and_minimum) ... ok
+test_controller_resume_with_stub_worker (test_restart.RestartTests.test_controller_resume_with_stub_worker) ... 170 GHz / C6: Q=16 panels/sector, N=96 total
+Candidate pairs/order: 1,536 (matrix-free, O(Q^2) time)
+Pair-map calls after coplanar exclusion: 1,408
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = -1
+{"j_ratio": 1.0, "j_initial": 1.0, "e_ratio": 0.5, "order": 0, "wall_seconds": 0.00021665898384526372}
+{"j_ratio": 0.3391817326856071, "j_initial": 0.5099019513592785, "e_ratio": 0.2037978074609209, "order": 1, "wall_seconds": 0.00047195699880830944}
+{"j_ratio": 0.1484478744118443, "j_initial": 0.25999999999999995, "e_ratio": 0.09463873139523603, "order": 2, "wall_seconds": 0.0005815750046167523}
+{"j_ratio": 0.07088860692601918, "j_initial": 0.1325745073534124, "e_ratio": 0.04630387063498584, "order": 3, "wall_seconds": 0.0005697779997717589}
+MAX_ORDER: NOT CONVERGED; last committed order=3
+170 GHz / C6: Q=16 panels/sector, N=96 total
+Candidate pairs/order: 1,536 (matrix-free, O(Q^2) time)
+Pair-map calls after coplanar exclusion: 1,408
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = -1
+{"j_ratio": 1.0, "j_initial": 1.0, "e_ratio": 0.5, "order": 0, "wall_seconds": 0.00018349901074543595}
+{"j_ratio": 0.3391817326856071, "j_initial": 0.5099019513592785, "e_ratio": 0.2037978074609209, "order": 1, "wall_seconds": 0.00016919299378059804}
+Requested step limit: paused; rerun the same command to resume.
+170 GHz / C6: Q=16 panels/sector, N=96 total
+Candidate pairs/order: 1,536 (matrix-free, O(Q^2) time)
+Pair-map calls after coplanar exclusion: 1,408
+Current + cumulative checkpoint/order: about 0.000 GiB
+Up to order 3: about 0.0 GiB, plus small metadata
+All 6 Fourier modes retained. RAM does not scale with reflection order.
+Mesh/physical accuracy and runtime are NOT certified by this estimate.
+Resume: last committed order = 1
+{"j_ratio": 0.1484478744118443, "j_initial": 0.25999999999999995, "e_ratio": 0.09463873139523603, "order": 2, "wall_seconds": 0.0001391050172969699}
+{"j_ratio": 0.07088860692601918, "j_initial": 0.1325745073534124, "e_ratio": 0.04630387063498584, "order": 3, "wall_seconds": 0.00017938000382855535}
+MAX_ORDER: NOT CONVERGED; last committed order=3
+ok
+test_corrupt_latest_falls_back_and_preserves (test_restart.RestartTests.test_corrupt_latest_falls_back_and_preserves) ... WARNING: order_000001: checksum mismatch; preserved as order_000001.corrupt-1788929601276424302
+ok
+test_interrupted_save_keeps_previous (test_restart.RestartTests.test_interrupted_save_keeps_previous) ... ok
+test_roundtrip_and_pending_ignored (test_restart.RestartTests.test_roundtrip_and_pending_ignored) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 6.944s
+
+OK
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)

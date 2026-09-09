@@ -1,0 +1,29 @@
+mkdir -p build/mod
+gfortran -O3 -fopenmp -ffree-line-length-none -Wall -Wextra -shared -fPIC -Jbuild/mod -Ibuild/mod ../K1_SUS_C6_hmatrix/common/mod_types.f90 ../K1_SUS_C6_hmatrix/common/mod_config.f90 ../K1_SUS_C6_hmatrix/common/mod_material.f90 ../K1_SUS_C6_hmatrix/common/mod_geometry.f90 ../K1_SUS_C6_hmatrix/common/mod_incident.f90 ../K1_SUS_C6_hmatrix/common/mod_operator.f90 ../K1_SUS_C6_hmatrix/c6_modal/mod_c6_modal.f90 ../K1_SUS_C6_hmatrix/acceleration/mod_bridge.f90 timing_bridge.f90 -o build/libhm.so
+../K1_SUS_C6_hmatrix/common/mod_material.f90:56:50:
+
+   56 |   pure subroutine electric_kernel(k,eta0,rvec,area,J,E,H,propagator)
+      |                                                  1
+Warning: Unused dummy argument ‘area’ at (1) [-Wunused-dummy-argument]
+../K1_SUS_C6_hmatrix/c6_modal/mod_c6_modal.f90:32:32:
+
+   32 |   subroutine select_active_modes(mode_norms, mode_policy, mode_tolerance, active_modes)
+      |                                ^
+Warning: ‘select_active_modes’ defined but not used [-Wunused-function]
+../K1_SUS_C6_hmatrix/c6_modal/mod_c6_modal.f90:73:32:
+
+   73 |   subroutine gather_active_modes(Jhat, active_modes, Jmode)
+      |                                ^
+Warning: ‘gather_active_modes’ defined but not used [-Wunused-function]
+OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 ../.venv/bin/python -m unittest discover -s tests -v
+test_break_even_boundary (test_scaling.ScalingTests.test_break_even_boundary) ... ok
+test_bridge_matches_reference_worker (test_scaling.ScalingTests.test_bridge_matches_reference_worker) ...  Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)
+ok
+test_mesh_counts (test_scaling.ScalingTests.test_mesh_counts) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.032s
+
+OK
+ Zs [ohm] =             (0.69991297648537032,-0.69991297648537032)

@@ -1,0 +1,29 @@
+mkdir -p build/mod
+gfortran -O3 -fopenmp -ffree-line-length-none -Wall -Wextra -Jbuild/mod -Ibuild/mod common/mod_types.f90 common/mod_config.f90 common/mod_material.f90 common/mod_geometry.f90 common/mod_incident.f90 common/mod_operator.f90 c6_modal/mod_c6_modal.f90 worker.f90 -o build/worker
+common/mod_material.f90:56:50:
+
+   56 |   pure subroutine electric_kernel(k,eta0,rvec,area,J,E,H,propagator)
+      |                                                  1
+Warning: Unused dummy argument ‘area’ at (1) [-Wunused-dummy-argument]
+c6_modal/mod_c6_modal.f90:32:32:
+
+   32 |   subroutine select_active_modes(mode_norms, mode_policy, mode_tolerance, active_modes)
+      |                                ^
+Warning: ‘select_active_modes’ defined but not used [-Wunused-function]
+c6_modal/mod_c6_modal.f90:73:32:
+
+   73 |   subroutine gather_active_modes(Jhat, active_modes, Jmode)
+      |                                ^
+Warning: ‘gather_active_modes’ defined but not used [-Wunused-function]
+worker.f90:15:55:
+
+   15 |   complex(dp) :: E(3,np),H(3,np),Ei(3,np),Hi(3),temp(3)
+      |                                                       1
+Warning: Unused variable ‘temp’ declared at (1) [-Wunused-variable]
+mkdir -p build/hm-mod
+gfortran -O3 -fopenmp -ffree-line-length-none -Wall -Wextra -fPIC -shared -Jbuild/hm-mod -Ibuild/hm-mod common/mod_types.f90 common/mod_config.f90 common/mod_material.f90 common/mod_geometry.f90 common/mod_incident.f90 common/mod_operator.f90 acceleration/mod_bridge.f90 -o build/libhm.so
+common/mod_material.f90:56:50:
+
+   56 |   pure subroutine electric_kernel(k,eta0,rvec,area,J,E,H,propagator)
+      |                                                  1
+Warning: Unused dummy argument ‘area’ at (1) [-Wunused-dummy-argument]
